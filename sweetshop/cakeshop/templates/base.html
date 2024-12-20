@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    {% block title %}
+    <title>Кондитерская "Brioche"</title>
+    {% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <header>
+      <div class="header__wrapper">
+        <div class="header__left-wrap">
+          <div class="logo">
+            <a href="{% url 'index' %}" class="logo__link">
+              <img
+                src="#"
+                alt="Логотип 'Brioche'"
+                class="logo__image"
+              />
+              Магазин-кондитерская
+            </a>
+          </div>
+          <div class="navigation">
+            <nav class="navigation__nav">
+              <ul class="navigation__list">
+                <li class="navigation__item">
+                  <a class="navigation__link" href="{% url 'index' %}"
+                    >Домашняя</a
+                  >
+                </li>
+                <li class="navigation__item">
+                  <a class="navigation__link" href="{% url 'cakes' %}"
+                    >Все десерты</a
+                  >
+                </li>
+                <li class="navigation__item">
+                  <a class="navigation__link" href="#"
+                    >Отзывы</a
+                  >
+                </li>
+                {% if user.is_authenticated %}
+                <li class="navigation__item">
+                  {{ user.get_username }}
+                  <form action="#" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="navigation__link">
+                      Выйти
+                    </button>
+                  </form>
+                </li>
+                {% else %}
+                <li class="navigation__item">
+                  <a class="navigation__link" href="#"
+                    >Зарегистрироваться</a
+                  >
+                </li>
+                <li class="navigation__item">
+                  <a class="navigation__link" href="#">Войти</a>
+                </li>
+                {% endif %}
+                <li class="navigation__item">
+                  <a class="navigation__link" href="#"
+                    >Заказать</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="contact">
+          <p class="contact__paragraf">+7 (123) 456-78-90</p>
+          <p class="contact__paragraf">sweetshop@brioche.ru</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="content">
+        <div class="content__wrapper">
+          {% block content %}
+          {% endblock %} 
+          {% block pagination %} 
+          {% if is_paginated %}
+          <div class="pagination">
+            {% if page_obj.has_previous %}
+            <a
+              class="pagination__link"
+              href="{{ request.path }}?page={{ page_obj.previous_page_number }}"
+              >Предыдущая</a
+            >
+            {% endif %}
+            <p class="pagination__current">
+              Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages
+              }}
+            </p>
+            {% if page_obj.has_next %}
+            <a
+              class="pagination__link"
+              href="{{ request.path }}?page={{ page_obj.next_page_number }}"
+              >Следующая</a
+            >
+            {% endif %}
+          </div>
+          {% endif %} 
+          {% endblock %}
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer__wrapper">
+        <div class="header__left-wrap">
+          <div class="logo">
+            <a href="{% url 'index' %}" class="logo__link">
+              <img
+                src="#"
+                alt="Логотип 'Brioche'"
+                class="logo__image"
+              />
+            </a>
+          </div>
+          <div class="navigation">
+            {% block sidebar %}
+            <ul class="navigation__list footer__list">
+              <li class="navigation__item">
+                <a class="navigation__link" href="{% url 'index' %}"
+                  >Домашняя</a
+                >
+              </li>
+              <li class="navigation__item">
+                <a class="navigation__link" href="{% url 'cakes' %}"
+                  >Все десерты</a
+                >
+              </li>
+              <li class="navigation__item">
+                <a class="navigation__link" href="#"
+                  >Отзывы</a
+                >
+              </li>
+              <li class="navigation__item">
+                <a class="navigation__link" href="#"
+                  >Заказать</a
+                >
+              </li>
+            </ul>
+            {% endblock %}
+          </div>
+        </div>
+        <div class="relations footer__relations">
+          <ul class="relations__list footer__link-list">
+            <li class="relations__item">
+              <a class="relations__link footer__link" href="{% url 'index' %}">
+                <img
+                  class="relations__image"
+                  src="#"
+                />
+              </a>
+            </li>
+            <li class="relations__item">
+              <a class="relations__link footer__link" href="{% url 'index' %}">
+                <img
+                  class="relations__image"
+                  src="#"
+                />
+              </a>
+            </li>
+          </ul>
+          <p class="relations__item">+7 (123) 456-78-90</p>
+          <p class="relations__item">sweetshop@brioche.ru</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
