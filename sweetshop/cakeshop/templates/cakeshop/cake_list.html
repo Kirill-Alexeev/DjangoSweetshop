@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<section class="begin background-tint">
+  <div class="begin__wrap">
+    <h1 class="begin__headline">Десерты</h1>
+    <h2 class="begin__text">Выберите то, что вам по душе!</h2>
+  </div>
+</section>
+
+<div class="cakes">
+  {% if cake_list %}
+  <ul class="cakes__list">
+    {% for cake in cake_list %}
+    <li class="cakes__item">
+      <a href="{{ cake.get_absolute_url }}" class="cakes__link">
+        <div class="cakes__image-wrap">
+          {% if cake.image %}
+          <img
+            src="{% get_static_prefix %}{{ cake.image }}"
+            alt="Изображение торта"
+            class="cakes__image"
+          />
+          {% endif %}
+        </div>
+        <h3 class="cakes__headline">{{ cake.title }}</h3>
+        <p class="cakes__weight">{{ cake.weight }}г</p>
+        <div class="cakes__bottom">
+          <p class="cakes__price">{{ cake.price }}₽</p>
+          <a href="#" class="cakes__button">В корзину</a>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% if is_paginated %}
+  <div class="pagination">
+    {% if page_obj.has_previous %}
+    <a
+      class="pagination__link"
+      href="{{ request.path }}?page={{ page_obj.previous_page_number }}"
+      >Предыдущая</a
+    >
+    {% endif %}
+    <p class="pagination__current">
+      {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+    </p>
+    {% if page_obj.has_next %}
+    <a
+      class="pagination__link"
+      href="{{ request.path }}?page={{ page_obj.next_page_number }}"
+      >Следующая</a
+    >
+    {% endif %}
+  </div>
+  {% endif %} 
+  {% else %}
+  <p class="cakes__empty">Извините, десертов пока нет.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

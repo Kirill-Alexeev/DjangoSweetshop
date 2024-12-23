@@ -11,9 +11,10 @@ def index(request):
         context={},
     )
 
+
 class CakeListView(generic.ListView):
     model = Cake
-    paginate_by = 9
+    paginate_by = 12
 
 
 class CakeDetailView(generic.DetailView):

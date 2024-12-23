@@ -331,3 +331,146 @@ a {
 .relations__image {
   width: 40px;
 }
+
+/* Страница всех десертов */
+
+/* НАЧАЛО */
+.begin {
+  width: 100%;
+  height: 400px;
+  background-image: url("../img/pictures/cakes_begin.png");
+  background-size: cover;
+  background-position: 50% 30%;
+}
+
+.background-tint {
+  background-color: rgba(0, 0, 0, 0.707);
+  background-blend-mode: multiply;
+}
+
+.begin__wrap {
+  max-width: 1400px;
+  margin: 0 auto 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.begin__headline {
+  color: var(--header-text);
+  font-size: 5rem;
+  margin: 150px 0 0;
+  text-align: center;
+}
+.begin__headline::after {
+  content: "";
+  background-color: var(--background-color);
+  width: 480px;
+  height: 2px;
+  display: block;
+  margin: 10px 0 15px;
+}
+
+.begin__text {
+  color: var(--background-color);
+  font-size: 1.8rem;
+}
+
+/* СПИСОК ДЕСЕРТОВ */
+.cakes {
+  max-width: 1400px;
+  margin: 50px auto 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cakes__list {
+  display: grid;
+  grid-template: repeat(auto-fit, 435px) / repeat(4, 330px);
+  column-gap: 20px;
+  row-gap: 30px;
+}
+
+.cakes__item {
+  background-color: var(--header-background);
+  box-shadow: 0 0 3px var(--shadow-color);
+  border-radius: 10px;
+}
+
+.cakes__link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cakes__image-wrap {
+  width: 100%;
+}
+
+.cakes__image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.cakes__headline {
+  color: var(--background-color);
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin: 0 0 0 15px;
+}
+
+.cakes__weight {
+  color: var(--search-btn-color);
+  font-size: 2rem;
+  margin: 0 0 0 15px;
+}
+
+.cakes__bottom {
+  width: 100%;
+  margin: 15px 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cakes__price {
+  color: var(--background-color);
+  font-size: 2.4rem;
+  margin: 0 0 0 15px;
+}
+
+.cakes__button {
+  background-color: var(--background-color);
+  color: var(--background-text);
+  font-size: 2rem;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  margin: 0 15px 0 0;
+}
+
+.cakes__empty {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.pagination {
+  max-width: 1400px;
+  margin: 0 auto 50px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination__link {
+  font-size: 1.5rem;
+  color: var(--background-text);
+}
+
+.pagination__current {
+  font-size: 1.6rem;
+  color: var(--background-text);
+}

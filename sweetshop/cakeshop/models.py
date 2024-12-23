@@ -25,7 +25,7 @@ class Cake(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100, help_text="Название торта")
     weight = models.IntegerField(verbose_name='Вес', help_text="Вес торта в граммах")
     description = models.TextField(verbose_name='Описание', max_length=1000, help_text="Описание торта")
-    image = models.ImageField(verbose_name='Изображение', upload_to="cakeshop/static/img/", help_text="Изображение торта")
+    image = models.CharField(verbose_name='Изображение', max_length=100, help_text="Изображение торта")
     price = models.DecimalField(verbose_name='Цена', max_digits=10, decimal_places=2, help_text="Цена торта в руб.")
     ingredients = models.ManyToManyField(Ingredient, verbose_name='Ингредиенты', help_text="Ингредиенты используемые для приготовления")
     created_at = models.DateField(verbose_name='Дата создания', auto_now_add=True)

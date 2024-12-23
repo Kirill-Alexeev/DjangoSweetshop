@@ -108,30 +108,6 @@
         <div class="content__wrapper">
           {% block content %} 
           {% endblock %} 
-          
-          {% block pagination %} 
-          {% if is_paginated %}
-          <div class="pagination">
-            {% if page_obj.has_previous %}
-            <a
-              class="pagination__link"
-              href="{{ request.path }}?page={{ page_obj.previous_page_number }}"
-              >Предыдущая</a
-            >
-            {% endif %}
-            <p class="pagination__current">
-              {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-            </p>
-            {% if page_obj.has_next %}
-            <a
-              class="pagination__link"
-              href="{{ request.path }}?page={{ page_obj.next_page_number }}"
-              >Следующая</a
-            >
-            {% endif %}
-          </div>
-          {% endif %} 
-          {% endblock %}
         </div>
       </section>
     </main>
