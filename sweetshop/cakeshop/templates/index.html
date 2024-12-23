@@ -4,10 +4,8 @@
 
 <section class="start background-tint">
   <div class="start__wrap">
-    <h1 class="start__headline">Кондитерская "Brioche"</h1>
-    <div class="start__link-wrap">
-      <a href="{% url 'cakes' %}" class="start__link">Ассортимент</a>
-    </div>
+    <h1 class="start__headline">Кондитерская "Sweet&Bliss"</h1>
+    <a href="{% url 'cakes' %}" class="start__link">Выбрать десерты</a>
   </div>
 </section>
 
@@ -15,54 +13,72 @@
   <div class="about__text">
     <h2 class="about__headline">О нас</h2>
     <p class="about__paragraf">
-      Кондитерская — уютное заведение, где вы сможете насладиться разнообразными
-      сладостями и напитками. У нас представлен широкий ассортимент выпечки,
-      десертов и напитков, созданных с любовью и заботой о каждом госте. Мы
-      предлагаем обслуживание на высшем уровне и индивидуальный подход к каждому
-      клиенту. Наши гости могут насладиться приятной атмосферой, вкусной едой и
-      отличным сервисом. Кондитерская открыта для всех желающих, и мы будем рады
-      видеть вас в числе наших гостей!
+      Откройте для себя мир, где каждый кусочек — это история, а каждый десерт —
+      момент чистого удовольствия. В Sweet&Bliss мы верим, что сладости — это
+      больше, чем просто лакомство. Это маленькие праздники жизни, созданные с
+      любовью и из лучших ингредиентов. <br /><br />Нежнейшие торты, тающие во
+      рту пирожные или изысканный шоколад — наши угощения созданы, чтобы
+      радовать ваши чувства и оставлять сладкое послевкусие счастья. Каждое
+      изделие — это гармония традиций и современных идей, дарящих вам мгновения
+      настоящего наслаждения. <br /><br />Приходите в Sweet&Bliss — место, где
+      вкус и искусство объединяются, а каждый визит становится по-настоящему
+      сладким воспоминанием!
     </p>
   </div>
   <div class="about__images">
-    <img class="about__image" src="#" alt="Изображены кондитерские изделия" />
-    <img class="about__image" src="#" alt="Изображены кондитерские изделия" />
+    <img
+      class="about__image"
+      src="{% static 'img/pictures/about1.png' %}"
+      alt="Изображены кондитерские изделия"
+    />
+    <img
+      class="about__image"
+      src="{% static 'img/pictures/about2.png' %}"
+      alt="Изображено помещение кондитерской"
+    />
   </div>
 </section>
 
-<section class="contacts">
-  <div class="contacts__wrapper">
-    <h2 class="contacts__headline">Контакты</h2>
-    <div class="contacts__bottom-wrap">
-      <div class="contacts__text-wrap">
-        <p class="contacts__text">
-          Время работы:<br />ПН-ПТ: 9:00-20:00<br />СБ-ВС: 10:00-18:00
-        </p>
-        <p class="contacts__text">Адрес:<br />г. Москва, ул. Сладкая, д. 9</p>
+<section class="contact">
+  <div class="contact__wrapper">
+    <h2 class="contact__headline">Контакты</h2>
+    <div class="contact__bottom">
+      <div class="contact__texts">
+        <p class="contact__text">Время работы:</p>
+        <p class="contact__text">ПН-ПТ: 9:00-20:00</p>
+        <p class="contact__text">СБ-ВС: 10:00-18:00</p>
+        <p class="contact__text">Адрес</p>
+        <p class="contact__text">г. Москва, ул. Сладкая, д. 9</p>
       </div>
       <ul class="relations">
         <li class="relations__item">
           <a class="relations__link" href="{% url 'index' %}">
-            <img class="relations__image" src="#" />
-            vk.com/sweetshop_brioche
+            <img class="relations__image" src="{% static 'img/svg/vk.svg' %}" />
+            vk.com/sweet_and_bliss
           </a>
         </li>
         <li class="relations__item">
           <a class="relations__link" href="{% url 'index' %}">
-            <img class="relations__image" src="#" />
-            t.me/sweetshop_brioche
+            <img class="relations__image" src="{% static 'img/svg/tg.svg' %}" />
+            t.me/sweet_and_bliss
           </a>
         </li>
         <li class="relations__item">
           <a class="relations__link" href="{% url 'index' %}">
-            <img class="relations__image" src="#" />
+            <img
+              class="relations__image"
+              src="{% static 'img/svg/phone.svg' %}"
+            />
             +7 (123) 456-78-90
           </a>
         </li>
         <li class="relations__item">
           <a class="relations__link" href="{% url 'index' %}">
-            <img class="relations__image" src="#" />
-            sweetshop@brioche.ru
+            <img
+              class="relations__image"
+              src="{% static 'img/svg/mail.svg' %}"
+            />
+            sweetandbliss@mail.ru
           </a>
         </li>
       </ul>

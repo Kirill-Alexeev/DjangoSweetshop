@@ -2,85 +2,113 @@
 <html lang="ru">
   <head>
     {% block title %}
-    <title>Кондитерская "Brioche"</title>
+    <title>Кондитерская "Sweet&Bliss"</title>
     {% endblock %}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/reset.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
   </head>
 
   <body>
-    <header>
+    <header class="header">
       <div class="header__wrapper">
-        <div class="header__left-wrap">
+        <div class="header__top">
           <div class="logo">
             <a href="{% url 'index' %}" class="logo__link">
               <img
-                src="#"
-                alt="Логотип 'Brioche'"
+                src="{% static 'img/svg/sweet_and_bliss_logo.svg' %}"
+                alt="Логотип 'Sweet&Bliss'"
                 class="logo__image"
               />
               Магазин-кондитерская
             </a>
           </div>
-          <div class="navigation">
-            <nav class="navigation__nav">
-              <ul class="navigation__list">
-                <li class="navigation__item">
-                  <a class="navigation__link" href="{% url 'index' %}"
-                    >Домашняя</a
-                  >
-                </li>
-                <li class="navigation__item">
-                  <a class="navigation__link" href="{% url 'cakes' %}"
-                    >Все десерты</a
-                  >
-                </li>
-                <li class="navigation__item">
-                  <a class="navigation__link" href="#"
-                    >Отзывы</a
-                  >
-                </li>
-                {% if user.is_authenticated %}
-                <li class="navigation__item">
-                  {{ user.get_username }}
-                  <form action="#" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="navigation__link">
-                      Выйти
-                    </button>
-                  </form>
-                </li>
-                {% else %}
-                <li class="navigation__item">
-                  <a class="navigation__link" href="#"
-                    >Зарегистрироваться</a
-                  >
-                </li>
-                <li class="navigation__item">
-                  <a class="navigation__link" href="#">Войти</a>
-                </li>
-                {% endif %}
-                <li class="navigation__item">
-                  <a class="navigation__link" href="#"
-                    >Заказать</a
-                  >
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <search class="search">
+            <form class="search__form">
+              <button class="search__button">
+                <img
+                  class="search__image"
+                  src="{% static 'img/svg/search.svg' %}"
+                />
+                Поиск
+              </button>
+              <input class="search__input" type="search" />
+            </form>
+          </search>
         </div>
-        <div class="contact">
-          <p class="contact__paragraf">+7 (123) 456-78-90</p>
-          <p class="contact__paragraf">sweetshop@brioche.ru</p>
-        </div>
+        <nav class="navigation">
+          <ul class="navigation__list">
+            <li class="navigation__item">
+              <a class="navigation__link" href="{% url 'index' %}">
+                <img
+                  class="navigation__image"
+                  src="{% static 'img/svg/home.svg' %}"
+                />
+                Главная
+              </a>
+            </li>
+            <li class="navigation__item">
+              <a class="navigation__link" href="{% url 'cakes' %}">
+                <img
+                  class="navigation__image"
+                  src="{% static 'img/svg/cake.svg' %}"
+                />
+                Десерты
+              </a>
+            </li>
+            <li class="navigation__item">
+              <a class="navigation__link" href="#">
+                <img
+                  class="navigation__image"
+                  src="{% static 'img/svg/cart.svg' %}"
+                />
+                Корзина
+              </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="navigation__item">
+              <form action="#" method="post" class="navigation__link">
+                {% csrf_token %}
+                <img
+                  class="navigation__image"
+                  src="{% static 'img/svg/user.svg' %}"
+                />
+                <button type="submit" class="navigation__btn">Выйти</button>
+              </form>
+            </li>
+            {% else %}
+            <li class="navigation__item">
+              <a class="navigation__link" href="#">
+                <img
+                  class="navigation__image"
+                  src="{% static 'img/svg/user.svg' %}"
+                />
+                Зарегистрироваться
+              </a>
+            </li>
+            <li class="navigation__item">
+              <a class="navigation__link" href="#">
+                <img
+                  class="navigation__image"
+                  src="{% static 'img/svg/user.svg' %}"
+                />
+                Войти
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <main>
+    <main class="main">
       <section class="content">
         <div class="content__wrapper">
-          {% block content %}
+          {% block content %} 
           {% endblock %} 
+          
           {% block pagination %} 
           {% if is_paginated %}
           <div class="pagination">
@@ -92,8 +120,7 @@
             >
             {% endif %}
             <p class="pagination__current">
-              Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages
-              }}
+              {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
             </p>
             {% if page_obj.has_next %}
             <a
@@ -109,67 +136,57 @@
       </section>
     </main>
 
-    <footer>
+    <footer class="footer">
       <div class="footer__wrapper">
-        <div class="header__left-wrap">
+        <div class="footer__main">
           <div class="logo">
             <a href="{% url 'index' %}" class="logo__link">
               <img
-                src="#"
-                alt="Логотип 'Brioche'"
+                src="{% static 'img/svg/sweet_and_bliss_logo.svg' %}"
+                alt="Логотип 'Sweet&Bliss'"
                 class="logo__image"
               />
             </a>
           </div>
           <div class="navigation">
             {% block sidebar %}
-            <ul class="navigation__list footer__list">
+            <ul class="navigation__list">
               <li class="navigation__item">
-                <a class="navigation__link" href="{% url 'index' %}"
-                  >Домашняя</a
-                >
+                <a class="navigation__link" href="{% url 'index' %}">Главная</a>
               </li>
               <li class="navigation__item">
-                <a class="navigation__link" href="{% url 'cakes' %}"
-                  >Все десерты</a
-                >
+                <a class="navigation__link" href="{% url 'cakes' %}">Десерты</a>
               </li>
               <li class="navigation__item">
-                <a class="navigation__link" href="#"
-                  >Отзывы</a
-                >
-              </li>
-              <li class="navigation__item">
-                <a class="navigation__link" href="#"
-                  >Заказать</a
-                >
+                <a class="navigation__link" href="#">Корзина</a>
               </li>
             </ul>
             {% endblock %}
           </div>
+          <div class="contacts">
+            <ul class="contacts__list">
+              <li class="contacts__item">
+                <a class="contacts__link" href="{% url 'index' %}">
+                  <img
+                    class="contacts__image"
+                    src="{% static 'img/svg/vk.svg' %}"
+                  />
+                </a>
+              </li>
+              <li class="contacts__item">
+                <a class="contacts__link" href="{% url 'index' %}">
+                  <img
+                    class="contacts__image"
+                    src="{% static 'img/svg/tg.svg' %}"
+                  />
+                </a>
+              </li>
+            </ul>
+            <p class="contacts__item">+7 (123) 456-78-90</p>
+            <p class="contacts__item">sweetandbliss@mail.ru</p>
+          </div>
         </div>
-        <div class="relations footer__relations">
-          <ul class="relations__list footer__link-list">
-            <li class="relations__item">
-              <a class="relations__link footer__link" href="{% url 'index' %}">
-                <img
-                  class="relations__image"
-                  src="#"
-                />
-              </a>
-            </li>
-            <li class="relations__item">
-              <a class="relations__link footer__link" href="{% url 'index' %}">
-                <img
-                  class="relations__image"
-                  src="#"
-                />
-              </a>
-            </li>
-          </ul>
-          <p class="relations__item">+7 (123) 456-78-90</p>
-          <p class="relations__item">sweetshop@brioche.ru</p>
-        </div>
+        <p class="footer__copyright">© 2024, Алексеев К. И. Все права защищены.</p>
       </div>
     </footer>
   </body>

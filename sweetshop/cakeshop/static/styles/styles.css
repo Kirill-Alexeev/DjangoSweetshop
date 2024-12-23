@@ -1,0 +1,333 @@
+:root {
+  --background-color: #ffffff;
+  --background-text: #222222;
+  --header-background: #363636;
+  --header-text: #ffffff;
+  --footer-background: #141414;
+  --headline-color: #2d0009;
+  --shadow-color: #000000;
+  --delete-color: #a50000;
+  --search-btn-color: #bababa;
+  --search-btn-hover: #dedede;
+  --search-btn-active: #808080;
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--background-text);
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* HEADER */
+.header {
+  width: 100%;
+  background-color: var(--header-background);
+}
+
+.header__wrapper {
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 0 auto;
+  padding: 20px 10px 0;
+}
+
+.header__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ЛОГОТИП */
+.logo__link {
+  color: var(--header-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.logo__image {
+  width: 250px;
+}
+
+/* ФОРМА ПОИСКА */
+.search__form {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.search__button {
+  background-color: var(--search-btn-color);
+  border: none;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.search__button:hover {
+  background-color: var(--search-btn-hover);
+}
+.search__button:active {
+  background-color: var(--search-btn-active);
+}
+
+.search__image {
+  margin: 0 5px 0 0;
+  width: 25px;
+}
+
+.search__input {
+  border: none;
+  color: var(--background-text);
+  font-size: 1.8rem;
+}
+
+/* НАВИГАЦИЯ ПО САЙТУ */
+.navigation {
+  margin: 0 0 20px 0;
+}
+
+.navigation__list {
+  display: flex;
+  align-items: end;
+  gap: 25px;
+}
+
+.navigation__item {
+  font-size: 1.8rem;
+  color: var(--shadow-color);
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  font-size: 1.8rem;
+  color: var(--header-text);
+}
+
+.navigation__btn {
+  background: none;
+  border: none;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 1.8rem;
+  color: var(--header-text);
+  padding: 0;
+  cursor: pointer;
+}
+
+.navigation__image {
+  height: 40px;
+}
+
+/* FOOTER */
+.footer {
+  width: 100%;
+  background-color: var(--footer-background);
+}
+
+.footer__wrapper {
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+.footer__main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* КОНТАКТЫ В ФУТЕРЕ */
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contacts__list {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.contacts__item {
+  color: var(--background-color);
+  font-size: 1.6rem;
+}
+
+.footer__copyright {
+  color: var(--search-btn-active);
+  font-size: 1.5rem;
+}
+
+/* ГЛАВНАЯ СТРАНИЦА */
+.content__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 50px;
+  gap: 30px;
+}
+
+/* ДОБРО ПОЖАЛОВАТЬ */
+.start {
+  width: 100%;
+  height: 650px;
+  margin: 0 0 70px;
+  background-image: url("../img/pictures/welcome.png");
+  background-size: cover;
+  background-position: 50% 60%;
+}
+
+.background-tint {
+  background-color: rgba(0, 0, 0, 0.596);
+  background-blend-mode: multiply;
+}
+
+.start__wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.start__headline {
+  width: 550px;
+  text-align: end;
+  font-size: 8rem;
+  margin: 200px 0 0;
+  color: var(--background-color);
+}
+
+.start__link {
+  max-width: 250px;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  padding: 15px 20px;
+  color: var(--background-color);
+  border: 1px solid var(--background-color);
+  border-radius: 5px;
+  margin: 0 0 0 300px;
+}
+.start__link:hover {
+  background-color: #00000067;
+}
+.start__link:active {
+  background-color: #9b9b9b67;
+}
+
+/* О нас */
+.about {
+  max-width: 1400px;
+  margin: 0 auto 50px;
+  display: flex;
+  gap: 40px;
+}
+
+.about__text {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.about__headline {
+  color: var(--headline-color);
+  font-size: 4rem;
+}
+
+.about__paragraf {
+  font-size: 1.8rem;
+}
+
+.about__images {
+  display: flex;
+  gap: 15px;
+}
+
+.about__image {
+  width: 400px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* КОНТАКТЫ */
+.contact__wrapper {
+  width: 1400px;
+  margin: 0 auto 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 30px;
+}
+
+.contact__headline {
+  color: var(--headline-color);
+  font-size: 4rem;
+}
+
+.contact__bottom {
+  display: flex;
+  gap: 100px;
+}
+
+.contact__texts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact__text {
+  font-size: 1.8rem;
+}
+
+.relations {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.relations__list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.relations__item {
+  display: flex;
+}
+
+.relations__link {
+  color: var(--background-text);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.relations__image {
+  width: 40px;
+}
