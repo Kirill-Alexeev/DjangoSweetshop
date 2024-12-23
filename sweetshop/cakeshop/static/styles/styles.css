@@ -457,6 +457,7 @@ a {
   font-weight: 600;
 }
 
+/* ПАГИНАЦИЯ */
 .pagination {
   max-width: 1400px;
   margin: 0 auto 50px;
@@ -473,4 +474,147 @@ a {
 .pagination__current {
   font-size: 1.6rem;
   color: var(--background-text);
+}
+
+/* СТРАНИЦА ДЕСЕРТА */
+
+/* ИНФОРМАЦИЯ О ДЕСЕРТЕ */
+.cake {
+  max-width: 1400px;
+  margin: 70px auto 50px;
+  display: flex;
+  gap: 40px;
+}
+
+.cake__image {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cake__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cake__headline {
+  color: var(--headline-color);
+  font-size: 5rem;
+  font-weight: 600;
+}
+
+.cake__text {
+  font-size: 2.2rem;
+  color: var(--header-background);
+}
+
+.cake__bottom {
+  width: 100%;
+  margin: auto 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cake__price {
+  font-size: 3.3rem;
+  color: var(--background-text);
+  margin-right: 30px;
+}
+
+.cake__button {
+  background-color: var(--header-background);
+  color: var(--background-color);
+  font-size: 2.5rem;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 15px;
+  margin: 0 10px 0;
+}
+
+/* ИНГРЕДИЕНТЫ */
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ingredients__headline {
+  font-size: 3rem;
+}
+
+.ingredients__list {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style-type: circle;
+  padding: 0 0 0 25px;
+}
+
+.ingredients__item {
+  font-size: 2.2rem;
+}
+
+/* ОТЗЫВЫ */
+.reviews {
+  max-width: 1400px;
+  margin: 0 auto 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reviews__headline {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 500;
+}
+
+.reviews__list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.reviews__item {
+  max-width: 1400px;
+  background-color: var(--header-background);
+  box-shadow: 0 0 3px var(--shadow-color);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+}
+
+.reviews__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviews__name {
+  font-size: 2.2rem;
+  color: var(--background-color);
+}
+
+.reviews__date {
+  font-size: 1.8rem;
+  color: var(--search-btn-color);
+}
+
+.reviews__text {
+  display: block;
+  font-size: 2rem;
+  color: var(--background-color);
+}
+
+.reviews__empty {
+  margin: 30px 0 0;
+  font-size: 3rem;
+  font-weight: 600;
 }

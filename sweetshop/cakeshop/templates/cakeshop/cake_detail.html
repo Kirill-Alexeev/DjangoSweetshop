@@ -1,0 +1,55 @@
+{% extends "base.html" %} 
+
+{% load static %} 
+
+{% block content %}
+<div class="cake">
+  <div class="cake__info">
+    <h1 class="cake__headline">{{ cake.title }}</h1>
+    <p class="cake__text">{{ cake.weight }}г</p>
+    <p class="cake__text">{{ cake.description }}</p>
+
+    {% if cake.ingredients.all %}
+    <div class="ingredients">
+      <h3 class="ingredients__headline">Состав торта:</h3>
+      <ul class="ingredients__list">
+        {% for ingredient in cake.ingredients.all %}
+        <li class="ingredients__item">{{ ingredient.title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="cake__bottom">
+      <p class="cake__price">{{ cake.price }}₽</p>
+      <a href="#" class="cake__button">В корзину</a>
+    </div>
+  </div>
+  <img
+    src="{% get_static_prefix %}{{ cake.image }}"
+    alt="Изображение торта"
+    class="cake__image"
+  />
+</div>
+
+<div class="reviews">
+  <h2 class="reviews__headline">Отзывы на {{ cake.title }}</h2>
+
+  {% if cake.review_set %}
+  <ul class="reviews__list">
+    {% for review in cake.review_set.all %}
+    <li class="reviews__item">
+      <div class="reviews__head">
+        <p class="reviews__name">{{ review.user.username }}</p>
+        <p class="reviews__date">{{ review.created_at }}</p>
+      </div>
+      <p class="reviews__text">{{ review.review }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="reviews__empty">На этот торт ещё нет отзывов.</p>
+  {% endif %}
+</div>
+
+{% endblock %}
