@@ -69,7 +69,7 @@
             </li>
             {% if user.is_authenticated %}
             <li class="navigation__item">
-              <form action="#" method="post" class="navigation__link">
+              <form action="{% url 'logout' %}" method="post" class="navigation__link">
                 {% csrf_token %}
                 <img
                   class="navigation__image"
@@ -80,16 +80,7 @@
             </li>
             {% else %}
             <li class="navigation__item">
-              <a class="navigation__link" href="#">
-                <img
-                  class="navigation__image"
-                  src="{% static 'img/svg/user.svg' %}"
-                />
-                Зарегистрироваться
-              </a>
-            </li>
-            <li class="navigation__item">
-              <a class="navigation__link" href="#">
+              <a class="navigation__link" href="{% url 'login' %}">
                 <img
                   class="navigation__image"
                   src="{% static 'img/svg/user.svg' %}"

@@ -4,7 +4,10 @@ from django.views import generic
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
-from .forms import ReviewForm
+from .forms import ReviewForm, RegisterUserForm
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import reverse_lazy
+from django.contrib.auth import login
 
 
 def index(request):
@@ -68,3 +71,26 @@ def delete_review(request, review_id):
     cake_id = review.cake.id
     review.delete()
     return redirect("cake-detail", pk=cake_id)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = RegisterUserForm()
+
+    return render(request, 'registration/register.html', {'form': form})
+
+
+class UserLoginView(LoginView):
+    template_name = 'registration/login.html'
+    next_page = reverse_lazy('index')
+
+
+# Выход (используем готовый LogoutView)
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('index')

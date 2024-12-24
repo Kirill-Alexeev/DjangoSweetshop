@@ -2,6 +2,7 @@ from django.urls import path, re_path
 from cakeshop import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import register, UserLoginView, UserLogoutView
 
 
 urlpatterns = [
@@ -11,5 +12,7 @@ urlpatterns = [
     path('cake/<int:cake_id>/add_review/', views.add_review, name='add-review'),
     path('review/<int:review_id>/edit/', views.edit_review, name='edit-review'),
     path('review/<int:review_id>/delete/', views.delete_review, name='delete-review'),
-    # path('register/', views.RegisterUser.as_view(), name='register'),
+    path('register/', register, name='register'),
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('logout/', UserLogoutView.as_view(), name='logout'),
 ]
