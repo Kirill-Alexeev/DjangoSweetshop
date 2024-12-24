@@ -52,10 +52,10 @@ class Review(models.Model):
         ordering = ['cake']
 
     def __str__(self):
-        return str(self.id)
+        return f"Отзыв от {self.user.username} на {self.cake.title}"
 
     def get_absolute_url(self):
-        return reverse("review-detail", args=[str(self.id)])
+        return reverse("cake-detail", args=[str(self.cake.id)])
 
 
 class Order(models.Model):

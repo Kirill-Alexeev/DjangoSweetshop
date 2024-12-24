@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="review__wrap">
+    <h1 class="reviews__form-headline">Редактировать отзыв</h1>
+    <form method="POST" class="reviews__form">
+        {% csrf_token %}
+        {{ form.review }}
+        <div class="reviews__actions">
+            <button type="submit" class="reviews__add">Сохранить</button>
+            <a href="{% url 'cake-detail' form.instance.cake.id %}" class="reviews__delete">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
