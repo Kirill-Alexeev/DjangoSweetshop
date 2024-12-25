@@ -16,7 +16,7 @@
         <tbody class="table__body">
             {% for order in orders %}
             <tr class="table__row">
-                <td class="table__cell"><a href="#" class="orders__link">#{{ order.id }}</a></td>
+                <td class="table__cell"><a href="{% url 'order_detail' order.id %}" class="orders__link">#{{ order.id }}</a></td>
                 <td class="table__cell">{{ order.execution_date }}</td>
                 <td class="table__cell">{{ order.cost }} ₽</td>
                 <td class="table__cell">{{ order.get_status_display }}</td>

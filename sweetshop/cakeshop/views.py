@@ -128,6 +128,8 @@ def cart_detail(request):
 @login_required
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
+    total_cost = sum(item.total_price for item in cart.items.all())
+
     if request.method == "POST":
         address = request.POST["delivery_address"]
         execution_date = request.POST["execution_date"]
@@ -152,7 +154,7 @@ def checkout(request):
 
         return redirect("order_detail", order_id=order.id)
 
-    return render(request, "checkout.html", {"cart": cart})
+    return render(request, "checkout.html", {"cart": cart, "total_cost": total_cost})
 
 
 @login_required
@@ -164,4 +166,18 @@ def order_list(request):
 @login_required
 def order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id)
-    return render(request, "order_detail.html", {"order": order})
+    
+    order_items = []
+    for order_item in order.ordercake_set.all():
+        total_price = order_item.cake.price * order_item.quantity
+        order_items.append({
+            "cake": order_item.cake,
+            "quantity": order_item.quantity,
+            "unit_price": order_item.cake.price,
+            "total_price": total_price,
+        })
+
+    return render(request, "order_detail.html", {
+        "order": order,
+        "order_items": order_items,
+    })

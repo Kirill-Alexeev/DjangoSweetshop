@@ -777,7 +777,10 @@ a:active {
 }
 
 /* КОРЗИНА */
-.cart {
+.cart,
+.checkout,
+.orders,
+.order {
   max-width: 1400px;
   margin: 70px auto;
   display: flex;
@@ -785,18 +788,135 @@ a:active {
   gap: 30px;
 }
 
-.cart__headline {
+.cart__headline,
+.checkout__headline,
+.orders__headline,
+.order__headline {
   font-size: 4rem;
+  font-weight: 500;
 }
 
-.cart__message {
+.cart__message,
+.orders__message {
   font-size: 2.5rem;
 }
 
-.cart__cost {
+.cart__cost,
+.checkout__cost,
+.order__total {
   font-size: 2.5rem;
+}
+
+.cost {
+  font-weight: 600;
 }
 
 .cart__link {
   font-size: 2.5rem;
+}
+
+.table {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.table__head,
+.table__body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+}
+
+.table__row,
+.table__head-row {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  padding: 5px;
+  position: relative;
+}
+.table__head-row::after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: var(--footer-background);
+  position: absolute;
+  top: 35px;
+  left: 0;
+}
+.table__row::after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 1px;
+  background-color: var(--header-background);
+  position: absolute;
+  top: 30px;
+  left: 0;
+}
+
+.table__head-cell {
+  text-align: left;
+  min-width: 200px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.table__cell {
+  min-width: 200px;
+  font-size: 2rem;
+}
+
+.cart__button,
+.checkout__button {
+  max-width: 240px;
+  text-align: center;
+  font-size: 2rem;
+  background-color: var(--header-background);
+  color: var(--background-color);
+  align-self: center;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 25px;
+  cursor: pointer;
+}
+
+/* ОФОРМЛЕНИЕ ЗАКАЗА */
+.checkout__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkout__label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 2rem;
+}
+
+.checkout__input {
+  width: 100%;
+}
+
+/* КОНКРЕТНЫЙ ЗАКАЗ */
+.order__subheadline {
+  font-size: 3.2rem;
+  font-weight: 500;
+}
+
+.order__infos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order__info {
+  font-size: 2rem;
 }

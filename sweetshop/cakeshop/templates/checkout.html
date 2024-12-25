@@ -1,21 +1,31 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="checkout">
-    <h2 class="checkout__headline">Оформление заказа</h2>
-    <form method="post" class="checkout__form">
-        {% csrf_token %}
-        <label class="checkout__label">
-            Адрес доставки:
-            <input type="text" name="delivery_address" required class="checkout__input">
-        </label>    
-        <label class="checkout__label">
-            Дата доставки:
-            <input type="date" name="execution_date" required class="checkout__input">
-        </label>
-    
-        <p class="checkout__cost">Итоговая стоимость: {{ total_cost }}</p>
-        <button type="submit" class="checkout__button">Заказать</button>
-    </form>
+  <h2 class="checkout__headline">Оформление заказа</h2>
+  <form method="post" class="checkout__form">
+    {% csrf_token %}
+    <label class="checkout__label">
+      Адрес доставки:
+      <input
+        type="text"
+        name="delivery_address"
+        required
+        class="checkout__input"
+      />
+    </label>
+    <label class="checkout__label">
+      Дата доставки:
+      <input
+        type="date"
+        name="execution_date"
+        required
+        class="checkout__input"
+      />
+    </label>
+
+    <p class="checkout__cost">
+      Итоговая стоимость: <span class="cost">{{ total_cost }}₽</span>
+    </p>
+    <button type="submit" class="checkout__button">Заказать</button>
+  </form>
 </div>
 {% endblock %}
