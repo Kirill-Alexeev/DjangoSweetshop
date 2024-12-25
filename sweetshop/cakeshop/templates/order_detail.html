@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="order-detail">
+    <h1 class="order-detail__headline">Детали заказа</h1>
+    <p class="order-detail__info"><strong>Номер заказа:</strong> {{ order.id }}</p>
+    <p class="order-detail__info"><strong>Дата создания:</strong> {{ order.created_at }}</p>
+    <p class="order-detail__info"><strong>Дата доставки:</strong> {{ order.execution_date }}</p>
+    <p class="order-detail__info"><strong>Статус:</strong> 
+        {% if order.status == "О" %}
+            Ожидается
+        {% elif order.status == "З" %}
+            Завершён
+        {% endif %}
+    </p>
+    <p class="order-detail__info"><strong>Адрес доставки:</strong> {{ order.delivery_address }}</p>
+    <p class="order-detail__info"><strong>Пользователь:</strong> {{ order.user.username }}</p>
+
+    <h2 class="order-detail__subheadline">Состав заказа:</h2>
+    <table class="order-detail__table">
+        <thead>
+            <tr>
+                <th>Торт</th>
+                <th>Количество</th>
+                <th>Цена за единицу</th>
+                <th>Общая стоимость</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order_item in order.ordercake_set.all %}
+            <tr>
+                <td>{{ order_item.cake.title }}</td>
+                <td>{{ order_item.quantity }}</td>
+                <td>{{ order_item.cake.price }}₽</td>
+                <td>{{ order_item.quantity|floatformat:2|add:order_item.cake.price }}₽</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p class="order-detail__total"><strong>Итоговая стоимость:</strong> {{ order.cost }}₽</p>
+</div>
+{% endblock %}

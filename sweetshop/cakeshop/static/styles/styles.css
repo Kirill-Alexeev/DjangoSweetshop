@@ -10,6 +10,8 @@
   --search-btn-color: #bababa;
   --search-btn-hover: #dedede;
   --search-btn-active: #808080;
+  --link-color: #424280;
+  --link-hover: #5959a9;
   font-size: 62.5%;
 }
 
@@ -21,10 +23,23 @@ body {
   background-color: var(--background-color);
   color: var(--background-text);
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 a {
   text-decoration: none;
+  color: var(--link-color);
+}
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+a:active {
+  color: var(--link-color);
+  text-decoration: underline;
 }
 
 /* HEADER */
@@ -575,7 +590,6 @@ a {
 }
 
 .reviews__headline {
-  text-align: center;
   font-size: 4rem;
   font-weight: 500;
 }
@@ -625,6 +639,7 @@ a {
 }
 
 .reviews__text {
+  overflow: hidden;
   display: block;
   font-size: 2rem;
   color: var(--background-color);
@@ -759,4 +774,29 @@ a {
 /* АВТОРИЗАЦИЯ */
 .register__link {
   font-size: 2rem;
+}
+
+/* КОРЗИНА */
+.cart {
+  max-width: 1400px;
+  margin: 70px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cart__headline {
+  font-size: 4rem;
+}
+
+.cart__message {
+  font-size: 2.5rem;
+}
+
+.cart__cost {
+  font-size: 2.5rem;
+}
+
+.cart__link {
+  font-size: 2.5rem;
 }

@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<div class="cart">
+  <h2 class="cart__headline">Ваша корзина</h2>
+
+  {% if message %}
+  <p class="cart__message">{{ message }}</p>
+  <div class="cart__message">
+    <a href="{% url 'login' %}" class="cart__link">Войти</a> или
+    <a href="{% url 'register' %}" class="cart__link">Зарегистрироваться</a>
+  </div>
+
+  {% elif cart.items.all %}
+  <table class="table">
+    <thead class="table__head">
+      <tr class="table__row">
+        <th class="table__head-cell">Название</th>
+        <th class="table__head-cell">Количество</th>
+        <th class="table__head-cell">Цена за штуку</th>
+        <th class="table__head-cell">Общая стоимость</th>
+      </tr>
+    </thead>
+    <tbody class="table__body">
+      {% for item in cart.items.all %}
+      <tr class="table__row">
+        <td class="table__cell">{{ item.cake.title }}</td>
+        <td class="table__cell">{{ item.quantity }}</td>
+        <td class="table__cell">{{ item.cake.price }}₽</td>
+        <td class="table__cell">{{ item.total_price }}₽</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="cart__cost">
+    Итоговая стоимость: <span class="cost">{{ total_cost }}₽</span>
+  </p>
+  <a href="{% url 'checkout' %}" class="cart__button">Оформить заказ</a>
+  {% else %}
+  <p class="cart__cost">Ваша корзина пуста.</p>
+  <a href="{% url 'cakes' %}" class="cart__link">Перейти к каталогу</a>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -22,7 +22,7 @@
 
     <div class="cake__bottom">
       <p class="cake__price">{{ cake.price }}₽</p>
-      <a href="#" class="cake__button">В корзину</a>
+      <a href="{% url 'add_to_cart' cake.id %}" class="cake__button">В корзину</a>
     </div>
   </div>
   <img

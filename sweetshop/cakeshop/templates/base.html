@@ -59,7 +59,7 @@
               </a>
             </li>
             <li class="navigation__item">
-              <a class="navigation__link" href="#">
+              <a class="navigation__link" href="{% url 'cart_detail' %}">
                 <img
                   class="navigation__image"
                   src="{% static 'img/svg/cart.svg' %}"
@@ -68,6 +68,15 @@
               </a>
             </li>
             {% if user.is_authenticated %}
+            <li class="navigation__item">
+              <a class="navigation__link" href="{% url 'order_list' %}">
+                <img
+                  class="navigation__image"
+                  src="{% static 'img/svg/edit.svg' %}"
+                />
+                Мои заказы
+              </a>
+            </li>
             <li class="navigation__item">
               <form action="{% url 'logout' %}" method="post" class="navigation__link">
                 {% csrf_token %}
@@ -125,7 +134,7 @@
                 <a class="navigation__link" href="{% url 'cakes' %}">Десерты</a>
               </li>
               <li class="navigation__item">
-                <a class="navigation__link" href="#">Корзина</a>
+                <a class="navigation__link" href="{% url 'cart_detail' %}">Корзина</a>
               </li>
             </ul>
             {% endblock %}
