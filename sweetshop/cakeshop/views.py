@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Cake, Cart, CartItem, Order, OrderCake, Review
+from .models import Cake, Cart, CartItem, Ingredient, Order, OrderCake, Review
 from django.views import generic
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,10 @@ from .forms import ReviewForm, RegisterUserForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.contrib.auth import login
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from .models import Cake
 
 
 # Домашняя страница
@@ -20,9 +24,52 @@ def index(request):
 
 
 # Список всех десертов
-class CakeListView(generic.ListView):
-    model = Cake
-    paginate_by = 12
+def cakes(request):
+    query = request.GET.get('q')  # Поисковый запрос
+    filter_by = request.GET.get('filter')  # Фильтр
+    ingredient_filter = request.GET.get('ingredient')  # Фильтр по ингредиенту
+
+    # Базовый запрос для тортов
+    cakes = Cake.objects.all()
+
+    if ingredient_filter:
+        if query:
+            # Фильтрация по ингредиенту и поисковому запросу
+            cakes = cakes.filter(
+                Q(ingredients__id=ingredient_filter) & 
+                (Q(title__icontains=query) | Q(description__icontains=query))
+            )
+        else:
+            # Только фильтрация по ингредиенту
+            cakes = cakes.filter(ingredients__id=ingredient_filter)
+    elif query:
+        # Только фильтрация по запросу
+        cakes = cakes.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
+    # Фильтрация по дополнительным критериям
+    if filter_by == 'price_asc':
+        cakes = cakes.order_by('price')
+    elif filter_by == 'price_desc':
+        cakes = cakes.order_by('-price')
+    elif filter_by == 'title':
+        cakes = cakes.order_by('title')
+
+    # Пагинация
+    paginator = Paginator(cakes, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Все доступные ингредиенты
+    ingredients = Ingredient.objects.all()
+
+    context = {
+        'page_obj': page_obj,
+        'query': query,
+        'filter_by': filter_by,
+        'ingredients': ingredients,
+        'selected_ingredient': ingredient_filter,  # Выбранный ингредиент
+    }
+    return render(request, 'cakeshop/cake_list.html', context)
 
 
 # Страница десерта

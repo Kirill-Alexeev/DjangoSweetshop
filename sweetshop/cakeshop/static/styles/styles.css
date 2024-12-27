@@ -42,6 +42,15 @@ a:active {
   text-decoration: underline;
 }
 
+input:placeholder {
+  color: var(--header-background);
+}
+
+select,
+option {
+  color: var(--header-background);
+}
+
 /* HEADER */
 .header {
   width: 100%;
@@ -394,7 +403,7 @@ a:active {
 /* СПИСОК ДЕСЕРТОВ */
 .cakes {
   max-width: 1400px;
-  margin: 50px auto 20px;
+  margin: 0 auto 20px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -873,7 +882,8 @@ a:active {
 }
 
 .cart__button,
-.checkout__button {
+.checkout__button,
+.filters__button {
   max-width: 240px;
   text-align: center;
   font-size: 2rem;
@@ -894,14 +904,17 @@ a:active {
   gap: 15px;
 }
 
-.checkout__label {
+.checkout__label,
+.filters__label {
   display: flex;
   flex-direction: column;
   gap: 5px;
   font-size: 2rem;
 }
 
-.checkout__input {
+.checkout__input,
+.filters__input,
+.filters__select {
   width: 100%;
 }
 
@@ -919,4 +932,28 @@ a:active {
 
 .order__info {
   font-size: 2rem;
+}
+
+/* ФИЛЬТРАЦИЯ */
+.filters {
+  width: 1400px;
+  margin: 30px auto 25px;
+  display: flex;
+}
+
+.filters__form {
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filters__wrap {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.filters__select {
+  min-width: 345px;
 }

@@ -13,7 +13,7 @@ router.register(r"orders", OrderViewSet, basename="order")
 urlpatterns = [
     re_path(r"^$", views.index, name="index"),
     # Десерты
-    re_path(r"^cakes/$", views.CakeListView.as_view(), name="cakes"),
+    re_path(r"^cakes/$", views.cakes, name="cakes"),
     re_path(r"^cake/(?P<pk>\d+)$", views.CakeDetailView.as_view(), name="cake-detail"),
     # Отзывы
     path("cake/<int:cake_id>/add_review/", views.add_review, name="add-review"),

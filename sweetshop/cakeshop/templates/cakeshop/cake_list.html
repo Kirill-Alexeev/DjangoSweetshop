@@ -6,10 +6,54 @@
   </div>
 </section>
 
+<div class="filters">
+  <form method="get" action="{% url 'cakes' %}" class="filters__form">
+    <label class="filters__label">
+      Поиск по названию:
+      <input
+        class="filters__input"
+        type="text"
+        name="q"
+        placeholder="Введите название"
+        value="{{ query|default:'' }}"
+      />
+    </label>
+    <div class="filters__wrap">
+      <label class="filters__label">
+        Сортировать по:
+        <select class="filters__select" name="filter">
+          <option value="">Умолчанию</option>
+          <option value="price_asc" {% if filter_by == 'price_asc' %}selected{% endif %}>
+              Цена (по возрастанию)
+          </option>
+          <option value="price_desc" {% if filter_by == 'price_desc' %}selected{% endif %}>
+              Цена (по убыванию)
+          </option>
+          <option value="title" {% if filter_by == 'title' %}selected{% endif %}>
+              Название
+          </option>
+        </select>
+      </label>
+      <label class="filters__label">
+        Фильтрация по ингредиентам:
+        <select name="ingredient" class="filters__select">
+          <option value="">Выберите ингредиент</option>
+          {% for ingredient in ingredients %}
+          <option value="{{ ingredient.id }}" {% if selected_ingredient == ingredient.id|stringformat:"s" %}selected{% endif %}>
+            {{ ingredient.title }}
+          </option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+    <button type="submit" class="filters__button">Применить</button>
+  </form>
+</div>
+
 <div class="cakes">
-  {% if cake_list %}
+  {% if page_obj %}
   <ul class="cakes__list">
-    {% for cake in cake_list %}
+    {% for cake in page_obj %}
     <li class="cakes__item">
       <a href="{{ cake.get_absolute_url }}" class="cakes__link">
         <div class="cakes__image-wrap">
@@ -31,27 +75,15 @@
     </li>
     {% endfor %}
   </ul>
-  {% if is_paginated %}
   <div class="pagination">
     {% if page_obj.has_previous %}
-    <a
-      class="pagination__link"
-      href="{{ request.path }}?page={{ page_obj.previous_page_number }}"
-      >Предыдущая</a
-    >
+    <a class="pagination__link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
     {% endif %}
-    <p class="pagination__current">
-      {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-    </p>
+    <span class="pagination__current">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
     {% if page_obj.has_next %}
-    <a
-      class="pagination__link"
-      href="{{ request.path }}?page={{ page_obj.next_page_number }}"
-      >Следующая</a
-    >
+    <a class="pagination__link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
     {% endif %}
   </div>
-  {% endif %} 
   {% else %}
   <p class="cakes__empty">Извините, десертов пока нет.</p>
   {% endif %}
