@@ -8,17 +8,17 @@ from .models import Cake, Order, Review, Ingredient, OrderCake, Cart, CartItem
 
 class IngredientInline(admin.TabularInline):
     model = Cake.ingredients.through
-    extra = 0
+    extra = 1
 
 
 class ReviewInline(admin.TabularInline):
     model = Review
-    extra = 0
+    extra = 1
 
 
 class OrderCakeInline(admin.TabularInline):
     model = OrderCake
-    extra = 0
+    extra = 1
 
 
 @admin.register(Ingredient)
@@ -39,6 +39,7 @@ class CakeResource(ModelResource):
 
     class Meta:
         model = Cake
+        exclude = ('id',)
         fields = (
             "id",
             "title",
@@ -66,7 +67,7 @@ class CakeResource(ModelResource):
 
     def dehydrate_ingredients_count(self, cake):
         """Возвращает количество ингредиентов."""
-        return cake.ingredients_count()
+        return cake.ingredients.count()
 
     def get_export_queryset(self, queryset, *args, **kwargs):
         """Фильтрует данные перед экспортом: например, десерты с ингредиентами больше 0."""
@@ -84,6 +85,7 @@ class CakeAdmin(ExportMixin, SimpleHistoryAdmin):
         "description",
         "image",
         "price",
+        "ingredients",
         ("created_at", "updated_at"),
     ]
     readonly_fields = ("id", "created_at", "updated_at")
@@ -94,16 +96,12 @@ class CakeAdmin(ExportMixin, SimpleHistoryAdmin):
     )
     filter_horizontal = ("ingredients",)
     date_hierarchy = "created_at"
-    inlines = [IngredientInline, ReviewInline]
+    inlines = [ReviewInline]
     list_per_page = 10
-
-    @admin.display(description="Количество символов", ordering="description")
-    def brief_info(self, cake: Cake):
-        return f"Описание содержит {len(cake.description)} символов."
 
 
 @admin.register(Review)
-class ReviewAdmin(SimpleHistoryAdmin):
+class ReviewAdmin(admin.ModelAdmin):
     list_display = ("id", "user", "cake", "review", "created_at")
     fields = ["id", "user", "cake", "review", "created_at"]
     readonly_fields = ("id", "created_at")
@@ -114,7 +112,7 @@ class ReviewAdmin(SimpleHistoryAdmin):
 
 
 @admin.register(Order)
-class OrderAdmin(SimpleHistoryAdmin):
+class OrderAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "user",
@@ -154,7 +152,7 @@ class OrderCakeAdmin(admin.ModelAdmin):
 
 
 @admin.register(Cart)
-class CartAdmin(SimpleHistoryAdmin):
+class CartAdmin(admin.ModelAdmin):
     list_display = ("id", "user", "created_at", "updated_at")
     list_display_links = (
         "id",
@@ -169,7 +167,7 @@ class CartAdmin(SimpleHistoryAdmin):
 
 
 @admin.register(CartItem)
-class CartItemAdmin(SimpleHistoryAdmin):
+class CartItemAdmin(admin.ModelAdmin):
     list_display = ("id", "cart", "cake", "quantity")
     list_display_links = ("id",)
     fields = ["id", "cart", "cake", "quantity"]

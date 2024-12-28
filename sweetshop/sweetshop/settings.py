@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "cakeshop",
     "rest_framework",
-    "simple_history",
+    # "simple_history",
     "import_export",
 ]
 

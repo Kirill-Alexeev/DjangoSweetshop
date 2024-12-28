@@ -5,8 +5,8 @@ from simple_history.models import HistoricalRecords
 
 
 class Ingredient(models.Model):
-    id = models.IntegerField(
-        primary_key=True, auto_created=True, help_text="Уникальный ID для ингредиента"
+    id = models.AutoField(
+        primary_key=True, help_text="Уникальный ID для ингредиента"
     )
     title = models.CharField(
         verbose_name="Название", max_length=100, help_text="Название ингредиента"
@@ -35,8 +35,8 @@ class Ingredient(models.Model):
 
 
 class Cake(models.Model):
-    id = models.IntegerField(
-        primary_key=True, auto_created=True, help_text="Уникальный ID для торта"
+    id = models.AutoField(
+        primary_key=True, help_text="Уникальный ID для торта"
     )
     title = models.CharField(
         verbose_name="Название", max_length=100, help_text="Название торта"
@@ -58,6 +58,7 @@ class Cake(models.Model):
         Ingredient,
         verbose_name="Ингредиенты",
         help_text="Ингредиенты используемые для приготовления",
+        blank=True,
     )
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     updated_at = models.DateField(verbose_name="Дата обновления", auto_now=True)
@@ -69,9 +70,6 @@ class Cake(models.Model):
 
     def __str__(self):
         return self.title
-
-    def ingredients_count(self):
-        return self.ingredients.count()
 
     def get_absolute_url(self):
         return reverse("cake-detail", args=[str(self.id)])
@@ -97,8 +95,6 @@ class Review(models.Model):
         verbose_name="Отзыв", max_length=1000, help_text="Текст отзыва"
     )
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
-
-    history = HistoricalRecords()
 
     class Meta:
         ordering = ["cake"]
@@ -143,8 +139,6 @@ class Order(models.Model):
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     updated_at = models.DateField(verbose_name="Дата обновления", auto_now=True)
 
-    history = HistoricalRecords()
-
     class Meta:
         ordering = ["id"]
 
@@ -178,8 +172,6 @@ class CartItem(models.Model):
     )
     cake = models.ForeignKey(Cake, on_delete=models.CASCADE, verbose_name="Торт")
     quantity = models.PositiveIntegerField(default=1, verbose_name="Количество")
-
-    history = HistoricalRecords()
 
     def __str__(self):
         return (
