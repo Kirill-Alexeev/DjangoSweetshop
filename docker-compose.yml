@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: ["python", "sweetshop/manage.py", "runserver", "0.0.0.0:8000"]
+    volumes:
+      - .:/app  # Копируем весь проект в контейнер
+      - sqlite_db:/app/db.sqlite3  # Сохраняем файл базы данных в volume
+    ports:
+      - "8000:8000"
+
+volumes:
+  sqlite_db:
