@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "cakeshop",
     "rest_framework",
     "simple_history",
+    "import_export",
 ]
 
 MIDDLEWARE = [

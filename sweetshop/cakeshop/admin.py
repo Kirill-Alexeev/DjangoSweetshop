@@ -1,5 +1,9 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
+from import_export.admin import ExportMixin
+from simple_history.admin import SimpleHistoryAdmin
+from import_export.resources import ModelResource
+from import_export.fields import Field
 from .models import Cake, Order, Review, Ingredient, OrderCake, Cart, CartItem
 
 
@@ -19,7 +23,7 @@ class OrderCakeInline(admin.TabularInline):
 
 
 @admin.register(Ingredient)
-class IngredientAdmin(SimpleHistoryAdmin):
+class IngredientAdmin(ExportMixin, SimpleHistoryAdmin):
     list_display = ('id', 'title', 'units', 'count', 'created_at', 'updated_at')
     fields = ['id', 'title', 'units', 'count', ('created_at', 'updated_at')]
     readonly_fields = ('id', 'created_at', 'updated_at')
@@ -28,8 +32,31 @@ class IngredientAdmin(SimpleHistoryAdmin):
     list_per_page = 15
 
 
+class CakeResource(ModelResource):
+    ingredients = Field(attribute='ingredients', column_name='Ингредиенты')
+    ingredients_count = Field(attribute='ingredients_count', column_name='Количество ингредиентов')
+
+    class Meta:
+        model = Cake
+        fields = ('id', 'title', 'weight', 'description', 'price', 'ingredients', 'ingredients_count', 'created_at')
+        export_order = ('id', 'title', 'weight', 'description', 'price', 'ingredients', 'ingredients_count', 'created_at')
+
+    def dehydrate_ingredients(self, cake):
+        """Возвращает список ингредиентов через запятую."""
+        return ", ".join([ingredient.title for ingredient in cake.ingredients.all()])
+
+    def dehydrate_ingredients_count(self, cake):
+        """Возвращает количество ингредиентов."""
+        return cake.ingredients_count()
+
+    def get_export_queryset(self, queryset, *args, **kwargs):
+        """Фильтрует данные перед экспортом: например, десерты с ингредиентами больше 0."""
+        return queryset.filter(ingredient__isnull=False).distinct()
+
+
 @admin.register(Cake)
-class CakeAdmin(SimpleHistoryAdmin):
+class CakeAdmin(ExportMixin, SimpleHistoryAdmin):
+    resource_class = CakeResource
     list_display = ('id', 'title', 'weight', 'price', 'created_at', 'updated_at')
     fields = ['id', 'title', 'weight', 'description', 'image', 'price', ('created_at', 'updated_at')]
     readonly_fields = ('id', 'created_at', 'updated_at')

@@ -69,6 +69,9 @@ class Cake(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def ingredients_count(self):
+        return self.ingredients.count()
 
     def get_absolute_url(self):
         return reverse("cake-detail", args=[str(self.id)])
