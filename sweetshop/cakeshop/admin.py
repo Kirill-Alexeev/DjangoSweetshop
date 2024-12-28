@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Cake, Order, Review, Ingredient, OrderCake
+from simple_history.admin import SimpleHistoryAdmin
+from .models import Cake, Order, Review, Ingredient, OrderCake, Cart, CartItem
 
 
 class IngredientInline(admin.TabularInline):
@@ -18,7 +19,7 @@ class OrderCakeInline(admin.TabularInline):
 
 
 @admin.register(Ingredient)
-class IngredientAdmin(admin.ModelAdmin):
+class IngredientAdmin(SimpleHistoryAdmin):
     list_display = ('id', 'title', 'units', 'count', 'created_at', 'updated_at')
     fields = ['id', 'title', 'units', 'count', ('created_at', 'updated_at')]
     readonly_fields = ('id', 'created_at', 'updated_at')
@@ -28,7 +29,7 @@ class IngredientAdmin(admin.ModelAdmin):
 
 
 @admin.register(Cake)
-class CakeAdmin(admin.ModelAdmin):
+class CakeAdmin(SimpleHistoryAdmin):
     list_display = ('id', 'title', 'weight', 'price', 'created_at', 'updated_at')
     fields = ['id', 'title', 'weight', 'description', 'image', 'price', ('created_at', 'updated_at')]
     readonly_fields = ('id', 'created_at', 'updated_at')
@@ -45,7 +46,7 @@ class CakeAdmin(admin.ModelAdmin):
 
 
 @admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
+class ReviewAdmin(SimpleHistoryAdmin):
     list_display = ('id', 'user', 'cake', 'review', 'created_at')
     fields = ['id', 'user', 'cake', 'review', 'created_at']
     readonly_fields = ('id', 'created_at')
@@ -56,7 +57,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 @admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(SimpleHistoryAdmin):
     list_display = ('id', 'user', 'execution_date', 'status', 'cost', 'delivery_address', 'created_at', 'updated_at')
     list_display_links = ('id', 'user')
     fields = ['id', 'user', 'execution_date', 'status', 'cost', 'delivery_address', ('created_at', 'updated_at')]
@@ -76,3 +77,26 @@ class OrderCakeAdmin(admin.ModelAdmin):
     raw_id_fields = ('order', 'cake')
     search_fields = ('order__id', 'cake__title')
     list_per_page = 15
+
+
+@admin.register(Cart)
+class CartAdmin(SimpleHistoryAdmin):
+    list_display = ('id', 'user', 'created_at', 'updated_at')
+    list_display_links = ('id', 'user',)
+    fields = ['id', 'user', ('created_at', 'updated_at')]
+    readonly_fields = ('id', 'created_at', 'updated_at')
+    search_fields = ('user__username',)
+    raw_id_fields = ('user',)
+    date_hierarchy = 'created_at'
+    list_per_page = 15
+
+
+@admin.register(CartItem)
+class CartItemAdmin(SimpleHistoryAdmin):
+    list_display = ('id', 'cart', 'cake', 'quantity')
+    list_display_links = ('id',)
+    fields = ['id', 'cart', 'cake', 'quantity']
+    readonly_fields = ('id',)
+    list_filter = ('cake',)
+    raw_id_fields = ('cart', 'cake',)
+    list_per_page = 10

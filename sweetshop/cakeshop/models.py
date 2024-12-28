@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from simple_history.models import HistoricalRecords
 
 
 class Ingredient(models.Model):
@@ -20,6 +21,8 @@ class Ingredient(models.Model):
     )
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     updated_at = models.DateField(verbose_name="Дата обновления", auto_now=True)
+
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ["id"]
@@ -59,6 +62,8 @@ class Cake(models.Model):
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     updated_at = models.DateField(verbose_name="Дата обновления", auto_now=True)
 
+    history = HistoricalRecords()
+
     class Meta:
         ordering = ["title"]
 
@@ -89,6 +94,8 @@ class Review(models.Model):
         verbose_name="Отзыв", max_length=1000, help_text="Текст отзыва"
     )
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
+
+    history = HistoricalRecords()
 
     class Meta:
         ordering = ["cake"]
@@ -133,6 +140,8 @@ class Order(models.Model):
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     updated_at = models.DateField(verbose_name="Дата обновления", auto_now=True)
 
+    history = HistoricalRecords()
+
     class Meta:
         ordering = ["id"]
 
@@ -166,6 +175,8 @@ class CartItem(models.Model):
     )
     cake = models.ForeignKey(Cake, on_delete=models.CASCADE, verbose_name="Торт")
     quantity = models.PositiveIntegerField(default=1, verbose_name="Количество")
+
+    history = HistoricalRecords()
 
     def __str__(self):
         return (
