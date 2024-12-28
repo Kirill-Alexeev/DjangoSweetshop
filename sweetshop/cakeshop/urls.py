@@ -1,7 +1,5 @@
 from django.urls import include, path, re_path
 from cakeshop import views
-from django.conf import settings
-from django.conf.urls.static import static
 from .views import register, UserLoginView, UserLogoutView
 from rest_framework.routers import DefaultRouter
 from .views_api import CakeViewSet, OrderViewSet
@@ -30,6 +28,5 @@ urlpatterns = [
     # Заказы
     path("orders/", views.order_list, name="order_list"),
     path("order/<int:order_id>/", views.order_detail, name="order_detail"),
-
-    path('api/', include((router.urls, 'cakeshop_api'), namespace='api')),
+    path("api/", include((router.urls, "cakeshop_api"), namespace="api")),
 ]

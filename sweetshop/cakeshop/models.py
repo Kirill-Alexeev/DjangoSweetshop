@@ -69,7 +69,7 @@ class Cake(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def ingredients_count(self):
         return self.ingredients.count()
 

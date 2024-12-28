@@ -109,7 +109,7 @@ def add_review(request, cake_id):
 @login_required
 def edit_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
-    
+
     # Проверка прав пользователя
     if request.user != review.user and not request.user.is_superuser:
         return HttpResponseForbidden("Вы не можете редактировать этот отзыв.")
