@@ -3,9 +3,21 @@
 {% block content %}
 <div class="review__wrap">
     <h1 class="reviews__form-headline">Редактировать отзыв</h1>
-    <form method="POST" class="reviews__form">
+    <form method="POST" class="reviews__form" novalidate>
         {% csrf_token %}
-        {{ form.review }}
+        <label class="reviews__label">
+            {{ form.review.label_tag }}:
+            {{ form.review }}
+        </label>
+
+        {% if form.review.errors %}
+        <div class="form__errors">
+            {% for error in form.review.errors %}
+            <p class="form__error">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
         <div class="reviews__actions">
             <button type="submit" class="reviews__add">Сохранить</button>
             <a href="{% url 'cake-detail' form.instance.cake.id %}" class="reviews__delete">Отмена</a>

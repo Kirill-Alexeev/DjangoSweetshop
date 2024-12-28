@@ -36,6 +36,7 @@
     Итоговая стоимость: <span class="cost">{{ total_cost }}₽</span>
   </p>
   <a href="{% url 'checkout' %}" class="cart__button">Оформить заказ</a>
+  <a href="{% url 'cakes' %}" class="cart__link">Продолжить выбор десертов</a>
   {% else %}
   <p class="cart__cost">Ваша корзина пуста.</p>
   <a href="{% url 'cakes' %}" class="cart__link">Перейти к каталогу</a>

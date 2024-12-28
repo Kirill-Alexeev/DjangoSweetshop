@@ -7,8 +7,8 @@ from rest_framework.routers import DefaultRouter
 from .views_api import CakeViewSet, OrderViewSet
 
 router = DefaultRouter()
-router.register(r"cakes", CakeViewSet, basename="cake")
-router.register(r"orders", OrderViewSet, basename="order")
+router.register(r"api/cakes", CakeViewSet, basename="api-cake")
+router.register(r"api/orders", OrderViewSet, basename="api-order")
 
 urlpatterns = [
     re_path(r"^$", views.index, name="index"),
@@ -31,5 +31,5 @@ urlpatterns = [
     path("orders/", views.order_list, name="order_list"),
     path("order/<int:order_id>/", views.order_detail, name="order_detail"),
 
-    path('api/', include(router.urls)),
+    path('api/', include((router.urls, 'cakeshop_api'), namespace='api')),
 ]

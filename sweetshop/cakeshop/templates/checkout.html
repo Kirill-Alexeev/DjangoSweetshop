@@ -1,25 +1,33 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} 
+
+{% block content %}
 <div class="checkout">
   <h2 class="checkout__headline">Оформление заказа</h2>
-  <form method="post" class="checkout__form">
+  <form method="post" class="checkout__form" novalidate>
     {% csrf_token %}
     <label class="checkout__label">
-      Адрес доставки:
-      <input
-        type="text"
-        name="delivery_address"
-        required
-        class="checkout__input"
-      />
+      {{ form.delivery_address.label }}: 
+      {{ form.delivery_address }} 
+
+      {% if form.delivery_address.errors %}
+      <div class="form__errors">
+        {% for error in form.delivery_address.errors %}
+        <p class="form__error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
     </label>
     <label class="checkout__label">
-      Дата доставки:
-      <input
-        type="date"
-        name="execution_date"
-        required
-        class="checkout__input"
-      />
+      {{ form.execution_date.label }}: 
+      {{ form.execution_date }} 
+
+      {% if form.execution_date.errors %}
+      <div class="form__errors">
+        {% for error in form.execution_date.errors %}
+        <p class="form__error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
     </label>
 
     <p class="checkout__cost">

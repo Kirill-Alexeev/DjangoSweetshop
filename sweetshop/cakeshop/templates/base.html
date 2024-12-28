@@ -25,81 +25,69 @@
               Магазин-кондитерская
             </a>
           </div>
-          <search class="search">
-            <form class="search__form">
-              <button class="search__button">
-                <img
-                  class="search__image"
-                  src="{% static 'img/svg/search.svg' %}"
-                />
-                Поиск
-              </button>
-              <input class="search__input" type="search" />
-            </form>
-          </search>
+          <nav class="navigation">
+            <ul class="navigation__list">
+              <li class="navigation__item">
+                <a class="navigation__link" href="{% url 'index' %}">
+                  <img
+                    class="navigation__image"
+                    src="{% static 'img/svg/home.svg' %}"
+                  />
+                  Главная
+                </a>
+              </li>
+              <li class="navigation__item">
+                <a class="navigation__link" href="{% url 'cakes' %}">
+                  <img
+                    class="navigation__image"
+                    src="{% static 'img/svg/cake.svg' %}"
+                  />
+                  Десерты
+                </a>
+              </li>
+              <li class="navigation__item">
+                <a class="navigation__link" href="{% url 'cart_detail' %}">
+                  <img
+                    class="navigation__image"
+                    src="{% static 'img/svg/cart.svg' %}"
+                  />
+                  Корзина
+                </a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="navigation__item">
+                <a class="navigation__link" href="{% url 'order_list' %}">
+                  <img
+                    class="navigation__image"
+                    src="{% static 'img/svg/edit.svg' %}"
+                  />
+                  Мои заказы
+                </a>
+              </li>
+              <li class="navigation__item">
+                <form action="{% url 'logout' %}" method="post" class="navigation__link">
+                  {% csrf_token %}
+                  <img
+                    class="navigation__image"
+                    src="{% static 'img/svg/user.svg' %}"
+                  />
+                  <button type="submit" class="navigation__btn">Выйти</button>
+                </form>
+              </li>
+              {% else %}
+              <li class="navigation__item">
+                <a class="navigation__link" href="{% url 'login' %}">
+                  <img
+                    class="navigation__image"
+                    src="{% static 'img/svg/user.svg' %}"
+                  />
+                  Войти
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
         </div>
-        <nav class="navigation">
-          <ul class="navigation__list">
-            <li class="navigation__item">
-              <a class="navigation__link" href="{% url 'index' %}">
-                <img
-                  class="navigation__image"
-                  src="{% static 'img/svg/home.svg' %}"
-                />
-                Главная
-              </a>
-            </li>
-            <li class="navigation__item">
-              <a class="navigation__link" href="{% url 'cakes' %}">
-                <img
-                  class="navigation__image"
-                  src="{% static 'img/svg/cake.svg' %}"
-                />
-                Десерты
-              </a>
-            </li>
-            <li class="navigation__item">
-              <a class="navigation__link" href="{% url 'cart_detail' %}">
-                <img
-                  class="navigation__image"
-                  src="{% static 'img/svg/cart.svg' %}"
-                />
-                Корзина
-              </a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="navigation__item">
-              <a class="navigation__link" href="{% url 'order_list' %}">
-                <img
-                  class="navigation__image"
-                  src="{% static 'img/svg/edit.svg' %}"
-                />
-                Мои заказы
-              </a>
-            </li>
-            <li class="navigation__item">
-              <form action="{% url 'logout' %}" method="post" class="navigation__link">
-                {% csrf_token %}
-                <img
-                  class="navigation__image"
-                  src="{% static 'img/svg/user.svg' %}"
-                />
-                <button type="submit" class="navigation__btn">Выйти</button>
-              </form>
-            </li>
-            {% else %}
-            <li class="navigation__item">
-              <a class="navigation__link" href="{% url 'login' %}">
-                <img
-                  class="navigation__image"
-                  src="{% static 'img/svg/user.svg' %}"
-                />
-                Войти
-              </a>
-            </li>
-            {% endif %}
-          </ul>
-        </nav>
       </div>
     </header>
 

@@ -63,13 +63,14 @@ option {
   flex-direction: column;
   gap: 15px;
   margin: 0 auto;
-  padding: 20px 10px 0;
+  padding: 20px 20px 0;
 }
 
 .header__top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 0 10px;
 }
 
 /* ЛОГОТИП */
@@ -77,6 +78,7 @@ option {
   color: var(--header-text);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-size: 1.5rem;
 }
@@ -956,4 +958,23 @@ option {
 
 .filters__select {
   min-width: 345px;
+}
+
+/* ВАЛИДАЦИЯ ФОРМ */
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.form__errors {
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.form__error {
+  color: #a50000;
+  font-size: 1.6rem;
 }

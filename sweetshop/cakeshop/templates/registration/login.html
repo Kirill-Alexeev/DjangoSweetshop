@@ -2,21 +2,31 @@
 
 {% block content %}
 <div class="register">
-    <h2 class="register__headline">Вход</h2>
-    <form method="post" class="register__form">
-      {% csrf_token %}
-      <label for="id_username" class="register__label">
-        Имя пользователя:
-        {{ form.username }}
+  <h2 class="register__headline">Вход</h2>
+  <form method="post" class="register__form" novalidate>
+    {% csrf_token %} 
+
+    {% if form.errors %}
+    <div class="form__errors">
+      {% for field, errors in form.errors.items %} 
+      {% for error in errors %}
+      <p class="form__error">{{ error }}</p>
+      {% endfor %} {% endfor %}
+    </div>
+    {% endif %}
+
+    <label for="id_username" class="register__label">
+      Имя пользователя: 
+      {{ form.username }}
     </label>
+
     <label for="id_password" class="register__label">
-        Пароль:
-        {{ form.password }}
+      Пароль: 
+      {{ form.password }}
     </label>
-      <button type="submit" class="register__button">Войти</button>
-    </form>
-    <a class="register__link" href="{% url 'register' %}">
-      Зарегистрироваться
-    </a>
+
+    <button type="submit" class="register__button">Войти</button>
+  </form>
+  <a class="register__link" href="{% url 'register' %}"> Зарегистрироваться </a>
 </div>
 {% endblock %}
