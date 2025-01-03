@@ -28,5 +28,6 @@ urlpatterns = [
     # Заказы
     path("orders/", views.order_list, name="order_list"),
     path("order/<int:order_id>/", views.order_detail, name="order_detail"),
+    # API
     path("api/", include((router.urls, "cakeshop_api"), namespace="api")),
 ]

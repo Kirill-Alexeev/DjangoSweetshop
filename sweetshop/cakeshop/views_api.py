@@ -4,11 +4,14 @@ from .models import Cake, Order
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class CakeViewSet(viewsets.ModelViewSet):
     queryset = Cake.objects.all()
     serializer_class = CakeSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['title', 'price', 'weight']
 
     @action(methods=["GET"], detail=False, url_path="cheaper-than")
     def get_cakes_cheaper_than(self, request):
@@ -36,6 +39,8 @@ class CakeViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['execution_date', 'status', 'cost', 'delivery_address']
 
     def get_queryset(self):
         if self.request.user.is_authenticated:

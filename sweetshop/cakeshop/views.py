@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 
 
-# Домашняя страница
+# Главная страница
 def index(request):
     return render(
         request,
@@ -23,10 +23,9 @@ def index(request):
 # Список всех десертов
 def cakes(request):
     query = request.GET.get("q")  # Поисковый запрос
-    filter_by = request.GET.get("filter")  # Фильтр
+    filter_by = request.GET.get("filter")  # Сортировка
     ingredient_filter = request.GET.get("ingredient")  # Фильтр по ингредиенту
 
-    # Базовый запрос для тортов
     cakes = Cake.objects.all()
 
     if ingredient_filter:
@@ -45,7 +44,7 @@ def cakes(request):
             Q(title__icontains=query) | Q(description__icontains=query)
         )
 
-    # Фильтрация по дополнительным критериям
+    # Сортировка по дополнительным критериям
     if filter_by == "price_asc":
         cakes = cakes.order_by("price")
     elif filter_by == "price_desc":
@@ -58,7 +57,6 @@ def cakes(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
-    # Все доступные ингредиенты
     ingredients = Ingredient.objects.all()
 
     context = {
@@ -66,7 +64,7 @@ def cakes(request):
         "query": query,
         "filter_by": filter_by,
         "ingredients": ingredients,
-        "selected_ingredient": ingredient_filter,  # Выбранный ингредиент
+        "selected_ingredient": ingredient_filter,
     }
     return render(request, "cakeshop/cake_list.html", context)
 
