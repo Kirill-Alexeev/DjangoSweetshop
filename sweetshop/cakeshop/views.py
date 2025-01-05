@@ -28,20 +28,27 @@ def cakes(request):
 
     cakes = Cake.objects.all()
 
+    # Сложные условия фильтрации с Q-запросами
     if ingredient_filter:
         if query:
-            # Фильтрация по ингредиенту и поисковому запросу
             cakes = cakes.filter(
                 Q(ingredients__id=ingredient_filter)
-                & (Q(title__icontains=query) | Q(description__icontains=query))
+                & (
+                    Q(title__icontains=query)
+                    | Q(description__icontains=query)
+                )
+                & ~Q(title__icontains="безглютеновый")
             )
         else:
             # Только фильтрация по ингредиенту
             cakes = cakes.filter(ingredients__id=ingredient_filter)
     elif query:
-        # Только фильтрация по запросу
         cakes = cakes.filter(
-            Q(title__icontains=query) | Q(description__icontains=query)
+            (
+                Q(title__icontains=query)
+                | Q(description__icontains=query)
+            )
+            & ~Q(title__icontains="безглютеновый")
         )
 
     # Сортировка по дополнительным критериям
@@ -51,6 +58,12 @@ def cakes(request):
         cakes = cakes.order_by("-price")
     elif filter_by == "title":
         cakes = cakes.order_by("title")
+    elif filter_by == "title_desc":
+        cakes = cakes.order_by("-title")
+    elif filter_by == "weight_asc":
+        cakes = cakes.order_by("weight")
+    elif filter_by == "weight_desc":
+        cakes = cakes.order_by("-weight")
 
     # Пагинация
     paginator = Paginator(cakes, 8)

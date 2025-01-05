@@ -30,7 +30,16 @@
               Цена (по убыванию)
           </option>
           <option value="title" {% if filter_by == 'title' %}selected{% endif %}>
-              Название
+              Название (по возрастанию)
+          </option>
+          <option value="title_desc" {% if filter_by == 'title_desc' %}selected{% endif %}>
+              Название (по убыванию)
+          </option>
+          <option value="weight_asc" {% if filter_by == 'weight_asc' %}selected{% endif %}>
+              Вес (по возрастанию)
+          </option>
+          <option value="weight_desc" {% if filter_by == 'weight_desc' %}selected{% endif %}>
+              Вес (по убыванию)
           </option>
         </select>
       </label>
