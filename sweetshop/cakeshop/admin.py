@@ -71,7 +71,7 @@ class CakeResource(ModelResource):
 
     def get_export_queryset(self, queryset, *args, **kwargs):
         """Фильтрует данные перед экспортом: например, десерты с ингредиентами больше 0."""
-        return queryset.filter(ingredient__isnull=False).distinct()
+        return queryset.filter(ingredients__isnull=False).distinct()
 
 
 @admin.register(Cake)
